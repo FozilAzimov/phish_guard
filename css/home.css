@@ -568,6 +568,7 @@
   flex-direction: column;
   padding-bottom: var(--dl-space-space-oneandhalfunits);
   justify-content: center;
+  text-align: center;
 }
 
 .home-heading07 {
@@ -600,6 +601,7 @@
   margin-left: var(--dl-space-space-twounits);
   padding-left: var(--dl-space-space-oneandhalfunits);
   text-decoration: none;
+  margin-left: 165px;
 }
 
 .home-text14 {
@@ -752,10 +754,9 @@
   display: flex;
   max-width: 100%;
   align-items: flex-start;
-  margin-top: 390px;
+  margin-top: 370px;
   padding-top: var(--dl-space-space-twounits);
   padding-left: var(--dl-space-space-fiveunits);
-  padding-right: 120px;
   flex-direction: row;
   padding-bottom: 120px;
   background-size: cover;
