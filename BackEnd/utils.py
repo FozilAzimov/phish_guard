@@ -6,24 +6,35 @@ import json
 import base64
 import re
 from urllib.parse import unquote, urlparse
+import sys, os
 
 
 def sus_characters(url):
     decoded_url = unquote(url)
     parsed_url = urlparse(decoded_url)
-    print(parsed_url)
     url_characters = parsed_url.netloc + parsed_url.path
     suspicious_characters = re.findall(r'[^\x00-\x7F]', url_characters)
-    
     if suspicious_characters:
         return True
     else:
         return False
 
+def check_whitelist(url):
+    try:
+        whitelist = [
+            "click.uz",
+            "payme.uz",
+            "it-park.uz"
+        ]
+        if urlparse(url).netloc in whitelist: return True
+        else: return False
+    except: return False
+
 def analyse_url(url):
     try:
+        if check_whitelist(url):
+            return '✅ Havola ishonchli'
         if sus_characters(url):
-            add_link_to_blacklist(url)
             return 'Diqqat! Sayt fishing sahifa ekanligi aniqlandi ‼️\n Sabab: Ushbu havolada shubxali belglilar (kirill harflari yoki boshqalar) aniqlandi.\nIltimos, ushbu havolaga ishonishdan oldin yaxshilab o\'ylab ko\'rishingizni so\'raymiz!'
         if get_blacklist(url):
             return 'Diqqat! Sayt fishing sahifa ekanligi aniqlandi ‼️\n Sabab: Ushbu havola bizning qora ro\'yxatimizga allaqachon kiritilgan.\nIltimos, ushbu havolaga ishonishdan oldin yaxshilab o\'ylab ko\'rishingizni so\'raymiz!'
@@ -32,26 +43,33 @@ def analyse_url(url):
             return "🙋‍♂️ Havolaning to'g'ri ekanligiga ishonch hosil qiling, quyidagi havola misol sifatida:\nhttps://example.com yoki http://example.com"
         if len(url) > 100:
             add_link_to_blacklist(url)
-            return "Diqqat! Sayt fishing sahifa ekanligi aniqlandi ‼️\n Sabab: Havola uzunligi rasmiy standartlardan uzun, bu esa uning norasmiy (nusxalangan) ya\'ni fishing havola ekanligiga dalil bo\'la oladi.\nIltimos, ushbu havolaga ishonishdan oldin yaxshilab o\'ylab ko\'rishingizni so\'raymiz!"
-    except:
-        pass    
-    # Start real analysis
-    r = requests.get(url).text
-    soup = BeautifulSoup(r, 'html.parser')
+            return "Diqqat! Sayt fishing sahifa ekanligi aniqlandi ‼️\n Sabab: Havola uzunligi rasmiy standartlardan uzun, bu esa uning norasmiy (nusxalangan) ya\'ni fishing havola ekanligiga dalil bo\'la oladi.\nIltimos, ushbu havolaga ishonishdan oldin yaxshilab o\'ylab ko\'rishingizni so\'raymiz!"    
+        
+        # Start real analysis
+        try:
+            r = requests.get(url).text
+        except:
+            return '❌ Saytni tekshirib bo\'lmadi - havola mavjud emas'
+        soup = BeautifulSoup(r, 'html.parser')
     
-    image_urls = []
-    img_tags = soup.find_all('img')
+        image_urls = []
+        img_tags = soup.find_all('img')
     
-    for img in img_tags:
-        src = img.get('src')
-        if src:
-            if src.startswith('http://') or src.startswith('https://'):
-                image_urls.append(__md5(src))
+        for img in img_tags:
+            src = img.get('src')
+            if src:
+                if src.startswith('http://') or src.startswith('https://'):
+                   image_urls.append(__md5(src))
     
-    sus_images = check_image_db(image_urls)
-    if len(sus_images) > 10:
-        add_link_to_blacklist(url)
-        return 'Diqqat! Sayt fishing sahifa ekanligi aniqlandi ‼️\nIltimos, ushbu havolaga ishonishdan oldin yaxshilab o\'ylab ko\'rishingizni so\'raymiz!'
+        sus_images = check_image_db(image_urls)
+        if len(sus_images) > 10:
+            add_link_to_blacklist(url)
+            return 'Diqqat! Sayt fishing sahifa ekanligi aniqlandi ‼️\nIltimos, ushbu havolaga ishonishdan oldin yaxshilab o\'ylab ko\'rishingizni so\'raymiz!'
+        return "✅ Havola ishonchli"
+    except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
 
 
 def check_image_db(image_checksums):
