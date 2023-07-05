@@ -79,6 +79,7 @@
 }
 
 .button-main {
+  width: 200px;
   gap: var(--dl-space-space-halfunit);
   color: rgb(255, 255, 255);
   cursor: pointer;
@@ -95,11 +96,13 @@
   flex-direction: row;
   padding-bottom: var(--dl-space-space-unit);
   justify-content: center;
-  background-color: rgb(36, 97, 255);
+  background-color: rgb(0 147 185);
+  margin-left: 35px;
 }
 
 .button-main:hover {
-  opacity: 0.75;
+  background-color: rgb(0, 129, 161);
+  transform: scale(1.05);
 }
 
 .quick-links {

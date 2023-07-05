@@ -1,7 +1,3 @@
-.features-section {
-  position: relative;
-}
-
 .features-heading {
   gap: var(--dl-space-space-unit);
   display: flex;
@@ -34,9 +30,6 @@
 }
 
 @media(max-width: 991px) {
-  .features-section {
-    border-right-width: 0px;
-  }
 
   .features-divider {
     width: 80px;
@@ -393,18 +386,31 @@
   padding-right: var(--dl-space-space-fiveunits);
   padding-bottom: var(--dl-space-space-oneandhalfunits);
   justify-content: space-between;
-  background-color: #e5ffff;
+  background-color: #cae5f2;
 }
 
 .home-left {
+  width: 60%;
   gap: var(--dl-space-space-twounits);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo>p {
+  margin-left: -20px;
+  margin-right: 40px;
+  font-size: 26px;
+  font-weight: 600;
 }
 
 .home-logo {
-  width: 259px;
+  width: 170px;
   height: 64px;
   object-fit: cover;
 }
@@ -549,51 +555,42 @@
 
 .home-main {
   width: 100%;
-  height: 708px;
+  height: 710px;
   display: flex;
-  z-index: 100;
-  /* max-width: 1440px; */
-  align-items: stretch;
-  padding-left: 0px;
-  margin-bottom: var(--dl-space-space-unit);
-  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
+  padding-left: 50px;
 }
 
-.home-content {
-  gap: var(--dl-space-space-threeunits);
-  display: flex;
-  align-items: flex-start;
-  padding-top: var(--dl-space-space-oneandhalfunits);
-  flex-direction: column;
-  padding-bottom: var(--dl-space-space-oneandhalfunits);
-  justify-content: center;
-  text-align: center;
+.left_text {
+  width: 40%;
+  text-align: left;
 }
 
-.home-heading07 {
-  gap: var(--dl-space-space-unit);
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  justify-content: center;
+.fon_img {
+  width: 60%;
+}
+
+.fon_img>img {
+  height: 710px;
+  width: 100%;
 }
 
 .home-header07 {
-  width: 100%;
-  font-size: 62px;
-  max-width: 750px;
+  width: 80%;
+  font-size: 48px;
   font-style: normal;
   font-weight: 600;
-  line-height: 74px;
+  line-height: 50px;
   margin-left: var(--dl-space-space-twounits);
+  margin-bottom: 20px;
 }
 
 .home-caption06 {
-  width: 100%;
+  width: 80%;
   font-size: 18px;
-  max-width: 600px;
   line-height: 27px;
+  padding-bottom: 40px;
   margin-left: var(--dl-space-space-twounits);
 }
 
@@ -606,14 +603,6 @@
 
 .home-text14 {
   margin-left: 0px;
-}
-
-.home-image08 {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
 }
 
 .home-image09 {
@@ -634,7 +623,7 @@
   flex-direction: row;
   padding-bottom: var(--dl-space-space-fiveunits);
   justify-content: center;
-  background-color: #2461FF;
+  background-color: #439cd9;
 }
 
 .home-content1 {
@@ -754,7 +743,7 @@
   display: flex;
   max-width: 100%;
   align-items: flex-start;
-  margin-top: 370px;
+  margin-top: 300px;
   padding-top: var(--dl-space-space-twounits);
   padding-left: var(--dl-space-space-fiveunits);
   flex-direction: row;
@@ -1001,7 +990,7 @@
   flex-direction: row;
   padding-bottom: var(--dl-space-space-sixunits);
   justify-content: space-between;
-  background-color: #e5ffff;
+  background-color: #cae5f2;
 }
 
 .home-container3 {
@@ -1044,13 +1033,12 @@
 .home-brand {
   gap: var(--dl-space-space-unit);
   display: flex;
-  max-width: 400px;
   align-items: flex-start;
   flex-direction: column;
 }
 
 .home-image10 {
-  width: 298px;
+  width: 250px;
   height: 84px;
   object-fit: cover;
   margin-right: var(--dl-space-space-halfunit);
@@ -1262,24 +1250,12 @@
     flex-direction: column;
   }
 
-  .home-content {
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
   .home-header07 {
     max-width: 75%;
   }
 
   .home-caption06 {
     max-width: 75%;
-  }
-
-  .home-image08 {
-    flex: 0 0 auto;
-    align-items: flex-end;
-    padding-right: var(--dl-space-space-twounits);
-    justify-content: flex-end;
   }
 
   .home-image09 {
@@ -1503,10 +1479,6 @@
 
   .home-mobile-menu {
     padding: 16px;
-  }
-
-  .home-content {
-    padding-right: var(--dl-space-space-oneandhalfunits);
   }
 
   .home-header07 {
